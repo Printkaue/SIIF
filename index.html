@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css">
+  <title>Sistema de Impressão - IFSI</title>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Sistema de Impressão — IFSI</h1>
+      <div>
+        <button class="btn" id="btn-logout" style="display:none">Sair</button>
+      </div>
+    </header>
+
+    <main class="card">
+      <div id="app" class="grid">
+        <!-- coluna principal -->
+        <div class="panel">
+          <!-- Login / Dashboard -->
+          <section id="login-section">
+            <h2>Entrar / Registrar</h2>
+            <p class="muted">Use um e-mail como login. Para ver a fila como protocolo, crie um usuário e escolha <strong>Protocolo</strong>.</p>
+            <div style="display:flex;gap:10px;margin-top:12px">
+              <div style="flex:1">
+                <label>E-mail (login)</label>
+                <input type="text" id="login-email" placeholder="ex: aluno@escola.local">
+                <label>Senha</label>
+                <input type="password" id="login-pass" placeholder="senha">
+                <div style="margin-top:10px;display:flex;gap:8px">
+                  <button class="primary" id="btn-login">Entrar</button>
+                  <button id="btn-show-register">Registrar</button>
+                </div>
+              </div>
+              <div style="width:260px" class="card">
+                <h3 class="small">Registrar novo usuário</h3>
+                <label>Nome</label>
+                <input type="text" id="reg-name" placeholder="Nome completo">
+                <label>E-mail</label>
+                <input type="text" id="reg-email" placeholder="email">
+                <label>Turma (opcional)</label>
+                <input type="text" id="reg-turma" placeholder="1A, 2B...">
+                <label>Tipo</label>
+                <select id="reg-type">
+                  <option value="aluno" class="reg-type">Aluno</option>
+                  <option value="protocolo" class="reg-type">Protocolo</option>
+                  <option value="professor" class="reg-type">Professor</option>
+                </select>
+                <label>Senha</label>
+                <input type="password" id="reg-pass" placeholder="senha">
+                <div style="margin-top:8px;display:flex;gap:8px">
+                  <button id="btn-register" class="primary">Salvar</button>
+                  <button id="btn-clear-register">Limpar</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="dashboard-section" style="display:none">
+            <h2>Fazer pedido de impressão</h2>
+            <div class="card">
+              <label>Nome</label>
+              <input id="req-name" type="text" placeholder="Seu nome">
+              <label>Turma</label>
+              <input id="req-turma" type="text" placeholder="Sua turma">
+              <label>Quantidade de folhas</label>
+              <input id="req-qty" type="text" inputmode="numeric" placeholder="Ex: 3">
+              <label>Descrição (opcional)</label>
+              <textarea id="req-desc" rows="3" placeholder="Observações sobre a impressão"></textarea>
+              <label>Arquivo (PDF/DOCX/Imagens) — max 3MB</label>
+              <input id="req-file" type="file" accept=".pdf,.doc,.docx,image/*">
+              <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+                <button id="btn-submit-req" class="primary">Solicitar Impressão</button>
+                <button id="btn-clear-req">Limpar</button>
+                <div id="file-preview" style="margin-left:auto" class="tiny muted"></div>
+              </div>
+            </div>
+
+            <h3 style="margin-top:14px">Meus pedidos</h3>
+            <div id="my-requests" class="card" style="min-height:60px"></div>
+          </section>
+
+          <section id="protocol-section" style="display:none">
+            <h2>Painel do Protocolo</h2>
+            <p class="muted">Aqui você vê a fila de impressão e pode marcar como concluída.</p>
+            <div class="card">
+              <h4>Fila de Impressões Pendentes</h4>
+              <div id="queue-list"></div>
+            </div>
+            <div style="margin-top:12px" class="card">
+              <h4>Histórico</h4>
+              <div id="history-list"></div>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- coluna lateral -->
+        <aside class="panel card">
+          <div id="user-info">
+            <h3>Visitante</h3>
+            <p class="muted">Faça login para começar.</p>
+          </div>
+
+          <div style="margin-top:12px">
+            <h4 class="small">Notificações</h4>
+            <ul id="notifications" class="list"></ul>
+          </div>
+
+          <div style="margin-top:12px">
+            <h4 class="small">Ações rápidas</h4>
+            <button id="btn-view-queue">Ver fila</button>
+            <button id="btn-view-dashboard">Novo pedido</button>
+            <button id="btn-view-history">Meu histórico</button>
+          </div>
+
+          <div style="margin-top:12px">
+            <h4 class="small">Relatório Rápido</h4>
+            <p class="tiny">Total de pedidos: <strong id="total-requests">0</strong></p>
+            <p class="tiny">Pedidos pendentes: <strong id="total-pending">0</strong></p>
+            <button id="btn-export-csv">Exportar CSV</button>
+          </div>
+        </aside>
+
+      </div>
+
+    </main>
+  </div>
+
+<script src="script.js"></script>
+</body>
+</html>
